@@ -1,0 +1,330 @@
+/* Inicio / Home Page Styles */
+
+.hero-banner {
+	background-image: 
+		linear-gradient(135deg, rgba(10, 60, 35, 0.90) 0%, rgba(15, 90, 53, 0.88) 60%, rgba(22, 101, 52, 0.92) 100%),
+		url('/campus-udea.jpg');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	color: #ffffff;
+	padding: 4.5rem 1.5rem 4rem;
+	position: relative;
+	overflow: visible;
+	box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.45);
+}
+
+.hero-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.hero-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	background-color: rgba(245, 166, 35, 0.2);
+	color: #fcd34d;
+	border: 1px solid rgba(245, 166, 35, 0.4);
+	padding: 0.35rem 0.85rem;
+	border-radius: 9999px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	margin-bottom: 1.25rem;
+}
+
+.hero-title {
+	font-size: clamp(2rem, 5vw, 3.25rem);
+	font-weight: 800;
+	line-height: 1.15;
+	margin-bottom: 1rem;
+	color: #ffffff;
+}
+
+.hero-subtitle {
+	font-size: 1.15rem;
+	color: #e2e8f0;
+	max-width: 720px;
+	line-height: 1.6;
+	margin-bottom: 2.5rem;
+}
+
+/* Buscador Rápido con Sugerencias (RF-08, UC08) */
+.search-box-wrapper {
+	max-width: 760px;
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 0.4rem;
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+	position: relative;
+	z-index: 40;
+}
+
+.search-input-group {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.25rem 0.75rem;
+}
+
+.search-input {
+	flex: 1;
+	border: none;
+	outline: none;
+	font-size: 1.05rem;
+	color: #1f2937;
+	padding: 0.6rem 0.25rem;
+}
+
+.search-input::placeholder {
+	color: #9ca3af;
+}
+
+.search-results-dropdown {
+	position: absolute;
+	top: calc(100% + 8px);
+	left: 0;
+	right: 0;
+	background: #ffffff;
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+	box-shadow:
+		0 20px 30px -5px rgba(0, 0, 0, 0.25),
+		0 10px 10px -5px rgba(0, 0, 0, 0.1);
+	max-height: 380px;
+	overflow-y: auto;
+	z-index: 100;
+	overflow-y: auto;
+	z-index: 100;
+}
+
+.search-result-item {
+	display: block;
+	padding: 0.85rem 1.25rem;
+	border-bottom: 1px solid #f3f4f6;
+	text-decoration: none;
+	transition: background-color 0.15s;
+}
+
+.search-result-item:hover {
+	background-color: var(--udea-green-surface);
+}
+
+.search-result-title {
+	font-weight: 700;
+	color: var(--udea-green-primary);
+	font-size: 0.95rem;
+}
+
+.search-result-category {
+	font-size: 0.75rem;
+	background: #e5e7eb;
+	color: #374151;
+	padding: 0.15rem 0.5rem;
+	border-radius: 4px;
+	margin-left: 0.5rem;
+}
+
+.search-result-desc {
+	font-size: 0.825rem;
+	color: #6b7280;
+	margin-top: 0.25rem;
+}
+
+.popular-chips {
+	margin-top: 1.25rem;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	font-size: 0.85rem;
+}
+
+.popular-chip-btn {
+	background: rgba(255, 255, 255, 0.15);
+	color: #ffffff;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	border-radius: 9999px;
+	padding: 0.25rem 0.75rem;
+	font-size: 0.8rem;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.popular-chip-btn:hover {
+	background: #ffffff;
+	color: var(--udea-green-primary);
+}
+
+/* 3 Accesos Directos Cruciales (HU_UDEA 01 - Criterio 1) */
+.priority-section {
+	max-width: 1200px;
+	margin: -2.5rem auto 3rem;
+	padding: 0 1.5rem;
+	position: relative;
+	z-index: 20;
+}
+
+.priority-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 1.5rem;
+}
+
+.priority-card {
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 1.75rem;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+	border: 1px solid var(--udea-border);
+	border-top: 4px solid var(--udea-green-primary);
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.priority-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+	border-top-color: var(--udea-yellow-gold);
+}
+
+.priority-card-badge {
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: var(--udea-green-primary);
+	background-color: var(--udea-green-surface);
+	padding: 0.25rem 0.6rem;
+	border-radius: 6px;
+	display: inline-block;
+	margin-bottom: 0.75rem;
+	width: fit-content;
+}
+
+.priority-card-title {
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: var(--udea-neutral-dark);
+	margin-bottom: 0.6rem;
+}
+
+.priority-card-desc {
+	font-size: 0.925rem;
+	color: var(--udea-neutral-muted);
+	line-height: 1.5;
+	margin-bottom: 1.5rem;
+}
+
+.priority-card-btn {
+	background-color: var(--udea-green-primary);
+	color: #ffffff;
+	padding: 0.75rem 1.25rem;
+	border-radius: 8px;
+	font-weight: 700;
+	font-size: 0.9rem;
+	text-align: center;
+	transition: background-color 0.15s ease;
+}
+
+.priority-card-btn:hover {
+	background-color: var(--udea-green-dark);
+}
+
+/* News Section */
+.news-section {
+	max-width: 1200px;
+	margin: 3.5rem auto;
+	padding: 0 1.5rem;
+}
+
+.section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-bottom: 2rem;
+	border-bottom: 2px solid #e5e7eb;
+	padding-bottom: 0.75rem;
+}
+
+.section-title {
+	font-size: 1.75rem;
+	font-weight: 800;
+	color: var(--udea-green-primary);
+	margin: 0;
+}
+
+.news-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1.5rem;
+}
+
+.news-card {
+	background: #ffffff;
+	border: 1px solid var(--udea-border);
+	border-radius: 10px;
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition:
+		border-color 0.15s,
+		box-shadow 0.15s;
+}
+
+.news-card:hover {
+	border-color: var(--udea-green-light);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.news-meta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.75rem;
+	font-size: 0.8rem;
+}
+
+.news-badge {
+	font-weight: 700;
+	color: var(--udea-green-primary);
+	background: var(--udea-green-surface);
+	padding: 0.2rem 0.5rem;
+	border-radius: 4px;
+}
+
+.news-date {
+	color: #9ca3af;
+}
+
+.news-heading {
+	font-size: 1.1rem;
+	font-weight: 700;
+	line-height: 1.4;
+	margin-bottom: 0.5rem;
+	color: var(--udea-neutral-dark);
+}
+
+.news-excerpt {
+	font-size: 0.875rem;
+	color: var(--udea-neutral-muted);
+	line-height: 1.5;
+	margin-bottom: 1.25rem;
+}
+
+.news-link {
+	font-weight: 700;
+	color: var(--udea-green-primary);
+	font-size: 0.875rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.news-link:hover {
+	text-decoration: underline;
+}

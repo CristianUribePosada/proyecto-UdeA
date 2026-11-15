@@ -1,0 +1,152 @@
+/* Trámites y Servicios CSS */
+
+.tramites-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.tramites-header {
+  margin-bottom: 2rem;
+}
+
+.tramites-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--udea-green-primary);
+  margin-bottom: 0.5rem;
+}
+
+.tramites-sub {
+  font-size: 1.05rem;
+  color: var(--udea-neutral-muted);
+  max-width: 800px;
+  line-height: 1.5;
+}
+
+/* Selector de Categorías / Tabs */
+.tabs-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.tab-btn {
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--udea-border);
+  background: #FFFFFF;
+  color: var(--udea-neutral-dark);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.tab-btn:hover {
+  border-color: var(--udea-green-primary);
+  color: var(--udea-green-primary);
+}
+
+.tab-btn.active {
+  background: var(--udea-green-primary);
+  color: #FFFFFF;
+  border-color: var(--udea-green-primary);
+}
+
+/* Grilla de Trámites */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: #FFFFFF;
+  border: 1px solid var(--udea-border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--udea-green-light);
+}
+
+.service-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #15803D;
+  background: #DCFCE7;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.service-target {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4B5563;
+  background: #F3F4F6;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.service-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--udea-neutral-dark);
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-desc {
+  font-size: 0.9rem;
+  color: var(--udea-neutral-muted);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+/* Requisitos (Criterio "Ver más" de HU_UDEA 01) */
+.service-details {
+  background: #F9FAFB;
+  border-radius: 8px;
+  padding: 0.85rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.825rem;
+}
+
+.service-details summary {
+  font-weight: 700;
+  color: var(--udea-green-primary);
+  cursor: pointer;
+}
+
+.service-details ul {
+  margin: 0.5rem 0 0 1.25rem;
+  padding: 0;
+  color: #4B5563;
+}
+
+.service-btn {
+  background: var(--udea-green-primary);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: background 0.15s ease;
+}
+
+.service-btn:hover {
+  background: var(--udea-green-dark);
+}

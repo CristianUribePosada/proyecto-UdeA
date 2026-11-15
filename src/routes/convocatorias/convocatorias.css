@@ -1,0 +1,121 @@
+/* Convocatorias CSS */
+
+.convocatorias-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.convocatorias-header {
+  margin-bottom: 2.5rem;
+}
+
+.convocatorias-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--udea-green-primary);
+  margin-bottom: 0.5rem;
+}
+
+.convocatorias-sub {
+  font-size: 1.05rem;
+  color: var(--udea-neutral-muted);
+  max-width: 800px;
+  line-height: 1.5;
+}
+
+/* Grilla de Convocatorias */
+.convocatorias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.convocatoria-card {
+  background: #FFFFFF;
+  border: 1px solid var(--udea-border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.convocatoria-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--udea-green-light);
+}
+
+.convocatoria-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.tag-type {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--udea-green-primary);
+  background: var(--udea-green-surface);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.tag-status {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.status-vigente {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.status-proxima {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+.convocatoria-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--udea-neutral-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.convocatoria-summary {
+  font-size: 0.9rem;
+  color: var(--udea-neutral-muted);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.convocatoria-details {
+  background: #F9FAFB;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.8rem;
+}
+
+.convocatoria-btn {
+  background: var(--udea-green-primary);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: background 0.15s ease;
+}
+
+.convocatoria-btn:hover {
+  background: var(--udea-green-dark);
+}

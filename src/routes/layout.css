@@ -1,0 +1,457 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+:root {
+	--udea-green-primary: #0f5a35;
+	--udea-green-dark: #0a3c23;
+	--udea-green-light: #18804d;
+	--udea-green-surface: #ebf5f0;
+	--udea-yellow-gold: #f5a623;
+	--udea-yellow-hover: #d98e14;
+	--udea-neutral-dark: #1f2937;
+	--udea-neutral-muted: #4b5563;
+	--udea-neutral-light: #f9fafb;
+	--udea-border: #e5e7eb;
+	--font-sans:
+		'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+		sans-serif;
+}
+
+body {
+	font-family: var(--font-sans);
+	font-optical-sizing: auto;
+	color: var(--udea-neutral-dark);
+	background-color: #f8faf9;
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* Component Header, Loading Bar, Layout styles */
+.loader-bar-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	z-index: 9999;
+	background: rgba(15, 90, 53, 0.15);
+	overflow: hidden;
+}
+
+.loader-bar-indicator {
+	height: 100%;
+	background: linear-gradient(90deg, #0f5a35 0%, #f5a623 50%, #18804d 100%);
+	width: 100%;
+	animation: pulse-loader 1.2s infinite ease-in-out;
+	transform-origin: 0% 50%;
+}
+
+@keyframes pulse-loader {
+	0% {
+		transform: translateX(-100%) scaleX(0.2);
+	}
+	50% {
+		transform: translateX(0%) scaleX(0.7);
+	}
+	100% {
+		transform: translateX(100%) scaleX(0.2);
+	}
+}
+
+/* Institutional top bar */
+.top-gov-bar {
+	background-color: #0a3c23;
+	color: #ffffff;
+	font-size: 0.75rem;
+	padding: 0.35rem 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.top-gov-bar a {
+	color: #d1fae5;
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.15s;
+}
+
+.top-gov-bar a:hover {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+/* Main Site Header */
+.site-header {
+	background: #ffffff;
+	border-bottom: 1px solid var(--udea-border);
+	position: relative;
+}
+
+.header-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1.5rem;
+	height: 68px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+}
+
+.brand-wrapper {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	height: 100%;
+}
+
+.header-logo {
+	height: 50px;
+	max-width: 280px;
+	width: auto;
+	object-fit: contain;
+	display: block;
+	transition: opacity 0.2s ease;
+}
+
+.header-logo:hover {
+	opacity: 0.92;
+}
+
+.brand-shield {
+	width: 44px;
+	height: 44px;
+	border-radius: 8px;
+	background-color: var(--udea-green-primary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #ffffff;
+	font-weight: 800;
+	font-size: 1.25rem;
+	letter-spacing: -0.5px;
+	box-shadow: 0 2px 4px rgba(15, 90, 53, 0.3);
+}
+
+.brand-info h1 {
+	font-size: 1.15rem;
+	font-weight: 800;
+	color: var(--udea-green-primary);
+	margin: 0;
+	line-height: 1.1;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.brand-info span {
+	font-size: 0.75rem;
+	color: var(--udea-neutral-muted);
+	font-weight: 500;
+}
+
+/* Role Selector Badges in Header */
+.role-bar {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	flex-wrap: wrap;
+}
+
+.role-label-title {
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: #6b7280;
+	margin-right: 0.25rem;
+}
+
+.role-link {
+	font-size: 0.75rem;
+	font-weight: 600;
+	padding: 0.25rem 0.55rem;
+	border-radius: 9999px;
+	background-color: #f3f4f6;
+	color: #374151;
+	white-space: nowrap;
+	transition: all 0.15s ease;
+}
+
+.role-link:hover {
+	background-color: var(--udea-green-surface);
+	color: var(--udea-green-primary);
+}
+
+/* Sticky Navigation Wrapper (Barra 3 + Barra 4 bajan juntas) */
+.sticky-nav-wrapper {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Navigation Bar */
+.main-nav {
+	background-color: var(--udea-green-primary);
+	color: #ffffff;
+}
+
+.main-nav-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+}
+
+.mobile-nav-title {
+	display: none;
+}
+
+.mobile-menu-btn {
+	display: none;
+	background: transparent;
+	border: none;
+	color: #ffffff;
+	padding: 0.65rem 0.25rem;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+}
+
+.nav-links {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-item-link {
+	display: inline-block;
+	padding: 0.85rem 1rem;
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: #ffffff;
+	border-bottom: 3px solid transparent;
+	transition:
+		background-color 0.15s,
+		border-color 0.15s;
+	white-space: nowrap;
+}
+
+.nav-item-link:hover {
+	background-color: var(--udea-green-dark);
+}
+
+.nav-item-link.active {
+	background-color: var(--udea-green-dark);
+	border-bottom-color: var(--udea-yellow-gold);
+}
+
+/* Breadcrumbs Section */
+.breadcrumbs-bar {
+	background-color: #f0fdf4;
+	border-bottom: 1px solid #dcfce7;
+	padding: 0.55rem 1.5rem;
+	font-size: 0.825rem;
+}
+
+.breadcrumbs-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+	color: #166534;
+}
+
+.breadcrumb-link {
+	color: var(--udea-green-primary);
+	font-weight: 500;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.breadcrumb-separator {
+	color: #9ca3af;
+}
+
+.breadcrumb-current {
+	font-weight: 700;
+	color: #111827;
+}
+
+/* Main Layout Content */
+.main-content {
+	min-height: calc(100vh - 350px);
+}
+
+/* Footer */
+.site-footer {
+	background: var(--udea-green-dark);
+	color: #ffffff;
+	margin-top: 4rem;
+	padding: 3rem 1.5rem 1.5rem;
+	border-top: 5px solid var(--udea-yellow-gold);
+}
+
+.footer-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 2rem;
+	margin-bottom: 2.5rem;
+}
+
+.footer-col h3 {
+	font-size: 1.05rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+	color: var(--udea-yellow-gold);
+}
+
+.footer-col ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.footer-col a {
+	font-size: 0.85rem;
+	color: #e5e7eb;
+	transition: color 0.15s;
+}
+
+.footer-col a:hover {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+.footer-bottom {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-top: 1.5rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+	font-size: 0.8rem;
+	color: #9ca3af;
+}
+
+/* Responsive mobile adjustments */
+@media (max-width: 768px) {
+	.header-inner {
+		height: auto;
+		min-height: 64px;
+		padding: 0.5rem 1rem;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+	}
+
+	.header-logo {
+		height: 42px;
+		max-width: 200px;
+	}
+
+	.role-bar {
+		display: flex !important;
+		width: 100%;
+		overflow-x: auto;
+		white-space: nowrap;
+		padding-top: 0.25rem;
+		padding-bottom: 0.25rem;
+		border-top: 1px solid #f3f4f6;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.role-label-title {
+		display: inline-block;
+	}
+
+	/* Menú desplegable móvil (3 rayas) */
+	.mobile-nav-title {
+		display: block;
+	}
+
+	.mobile-menu-btn {
+		display: flex;
+	}
+
+	.main-nav-inner {
+		padding: 0.5rem 1rem;
+	}
+
+	.nav-links {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background-color: var(--udea-green-dark);
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0;
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+		z-index: 100;
+	}
+
+	.nav-links.open {
+		display: flex;
+		animation: slide-down 0.2s ease-out forwards;
+	}
+
+	@keyframes slide-down {
+		from {
+			opacity: 0;
+			transform: translateY(-8px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.nav-item-link {
+		padding: 0.9rem 1.25rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		font-size: 0.95rem;
+	}
+
+	.nav-item-link.active {
+		background-color: rgba(0, 0, 0, 0.2);
+		border-left: 4px solid var(--udea-yellow-gold);
+		border-bottom-color: rgba(255, 255, 255, 0.08);
+	}
+}

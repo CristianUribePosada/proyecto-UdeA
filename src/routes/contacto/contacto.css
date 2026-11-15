@@ -1,0 +1,169 @@
+/* Directorio y Contacto CSS */
+
+.contacto-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.contacto-header {
+  margin-bottom: 2.5rem;
+}
+
+.contacto-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--udea-green-primary);
+  margin-bottom: 0.5rem;
+}
+
+.contacto-sub {
+  font-size: 1.05rem;
+  color: var(--udea-neutral-muted);
+  max-width: 800px;
+  line-height: 1.5;
+}
+
+/* Canales de Atención Primarios */
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.channel-card {
+  background: #FFFFFF;
+  border: 1px solid var(--udea-border);
+  border-top: 4px solid var(--udea-green-primary);
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.channel-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #15803D;
+  background: #DCFCE7;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.channel-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--udea-neutral-dark);
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.channel-detail {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--udea-green-primary);
+  margin-bottom: 0.5rem;
+}
+
+.channel-schedule {
+  font-size: 0.85rem;
+  color: var(--udea-neutral-muted);
+}
+
+/* Formulario PQRSDF y Directorio de Sedes */
+.layout-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.form-card, .locations-card {
+  background: #FFFFFF;
+  border: 1px solid var(--udea-border);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.card-heading {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--udea-green-primary);
+  margin-bottom: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--udea-neutral-dark);
+  margin-bottom: 0.4rem;
+}
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1.5px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--udea-green-primary);
+}
+
+.form-submit-btn {
+  width: 100%;
+  background: var(--udea-green-primary);
+  color: #FFFFFF;
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.form-submit-btn:hover {
+  background: var(--udea-green-dark);
+}
+
+.location-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.location-item:last-child {
+  border-bottom: none;
+}
+
+.location-name {
+  font-weight: 700;
+  color: var(--udea-neutral-dark);
+  font-size: 1rem;
+}
+
+.location-city {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1E40AF;
+  text-transform: uppercase;
+}
+
+.location-address {
+  font-size: 0.85rem;
+  color: var(--udea-neutral-muted);
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 900px) {
+  .layout-split {
+    grid-template-columns: 1fr;
+  }
+}
