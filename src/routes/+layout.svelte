@@ -12,11 +12,28 @@
 
   // Control del menú desplegable móvil (hamburguesa)
   let isMobileMenuOpen = $state(false);
+  let menuFrame = 0;
 
   // Animación de carga durante navegación en Svelte 5
   let isLoading = $derived(navigating.to !== null);
   let currentPath = $derived(page.url.pathname);
   let breadcrumbs = $derived(getBreadcrumbs(currentPath));
+
+  /**
+   * Agrupa la mutación del DOM del menú móvil en un único frame.
+   * Evita escrituras secuenciales que provocan reflow forzado en el hilo principal.
+   */
+  function setMobileMenu(open: boolean) {
+    if (menuFrame) cancelAnimationFrame(menuFrame);
+    menuFrame = requestAnimationFrame(() => {
+      isMobileMenuOpen = open;
+      menuFrame = 0;
+    });
+  }
+
+  function toggleMobileMenu() {
+    setMobileMenu(!isMobileMenuOpen);
+  }
 
   // Cerrar el menú móvil al navegar
   $effect(() => {
@@ -24,15 +41,23 @@
       isMobileMenuOpen = false;
     }
   });
+
+  // Cerrar el menú con la tecla Escape (accesibilidad, sin listeners redundantes)
+  $effect(() => {
+    function onKeydown(event: KeyboardEvent) {
+      if (event.key === 'Escape' && isMobileMenuOpen) setMobileMenu(false);
+    }
+    window.addEventListener('keydown', onKeydown);
+    return () => window.removeEventListener('keydown', onKeydown);
+  });
 </script>
 
 <svelte:head>
   <title>Portal Web UdeA | Rediseño Oficial ResignUP</title>
   <meta name="description" content="Rediseño del portal oficial de la Universidad de Antioquia con navegación clara, rápida y accesible." />
-  <!-- Preload logo LCP resource with high priority -->
-  <link rel="preload" as="image" href="/logo-udea.webp" fetchpriority="high" />
-  <!-- Prefetch hero background image to reduce LCP -->
-  <link rel="preload" as="image" href="/campus-udea.webp" />
+  <!-- Preload del logo (LCP en páginas internas) con prioridad alta -->
+  <link rel="preload" as="image" href="/logo-udea.webp" type="image/webp" fetchpriority="high" />
+  <!-- El hero (campus-udea.webp) se precarga solo en la página de inicio, donde es el LCP -->
   <!-- Favicons for responsive devices -->
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
@@ -96,11 +121,12 @@
       <span class="mobile-nav-title md:hidden font-bold text-sm tracking-wide">Menú Institucional</span>
 
       <!-- Botón de 3 Rayas (Hamburguesa) para versión móvil -->
-      <button 
-        type="button" 
-        class="mobile-menu-btn md:hidden" 
-        onclick={() => isMobileMenuOpen = !isMobileMenuOpen}
+      <button
+        type="button"
+        class="mobile-menu-btn md:hidden"
+        onclick={toggleMobileMenu}
         aria-expanded={isMobileMenuOpen}
+        aria-controls="primary-navigation"
         aria-label="Abrir o cerrar menú principal"
       >
         {#if isMobileMenuOpen}
@@ -117,7 +143,7 @@
       </button>
 
       <!-- Lista de Enlaces: barra horizontal en PC, menú vertical desplegable en móviles -->
-      <ul class="nav-links" class:open={isMobileMenuOpen}>
+      <ul class="nav-links" id="primary-navigation" class:open={isMobileMenuOpen}>
         {#each MAIN_NAVIGATION as item}
           <li class="w-full md:w-auto">
             <a 
