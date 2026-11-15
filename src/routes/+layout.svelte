@@ -29,7 +29,9 @@
 <svelte:head>
   <title>Portal Web UdeA | Rediseño Oficial ResignUP</title>
   <meta name="description" content="Rediseño del portal oficial de la Universidad de Antioquia con navegación clara, rápida y accesible." />
-  <!-- Prefetch critical hero image to reduce LCP -->
+  <!-- Preload logo LCP resource with high priority -->
+  <link rel="preload" as="image" href="/logo-udea.webp" fetchpriority="high" />
+  <!-- Prefetch hero background image to reduce LCP -->
   <link rel="preload" as="image" href="/campus-udea.webp" />
   <!-- Favicons for responsive devices -->
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
@@ -66,7 +68,7 @@
 <header class="site-header">
   <div class="header-inner">
     <a href="/" class="brand-wrapper" title="Ir al Inicio del portal de la UdeA">
-      <img src="/logo-udea.webp" alt="Universidad de Antioquia" class="header-logo" width="280" height="50" loading="lazy" />
+      <img src="/logo-udea.webp" alt="Universidad de Antioquia" class="header-logo" width="280" height="50" fetchpriority="high" />
     </a>
 
     <!-- Accesos Rápidos por Roles (Siempre visibles y optimizados para móviles) -->

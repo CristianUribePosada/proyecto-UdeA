@@ -5,8 +5,10 @@
 		linear-gradient(135deg, rgba(10, 60, 35, 0.90) 0%, rgba(15, 90, 53, 0.88) 60%, rgba(22, 101, 52, 0.92) 100%),
 		url('/campus-udea.webp');
 	background-size: cover;
-	background-position: center center;
+	background-position: center top;
 	background-repeat: no-repeat;
+	/* Hint al navegador para pre-cargar el fondo crítico del hero */
+	will-change: auto;
 	color: #ffffff;
 	padding: 4.5rem 1.5rem 4rem;
 	min-height: 350px;
