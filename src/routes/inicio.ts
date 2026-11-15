@@ -108,7 +108,7 @@ export const PRIORITY_ACTIONS: HeroAction[] = [
   },
   {
     id: 'act-admisiones',
-    title: 'Admisiones/Inscripciones',
+    title: 'Admisiones',
     description: 'Calendario oficial, requisitos, guías paso a paso y registro para el examen de admisión.',
     href: '/admisiones',
     icon: 'user-plus',
