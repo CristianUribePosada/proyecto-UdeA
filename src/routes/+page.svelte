@@ -16,7 +16,7 @@
   }
 </script>
 
-<!-- Hero Banner Rediseñado: Sin sobrecarga visual, con foco en el usuario -->
+<!-- Banner Rediseñado: Sin sobrecarga visual, con foco en el usuario -->
 <section class="hero-banner">
   <div class="hero-container">
     <div class="hero-badge">
@@ -142,5 +142,37 @@
         </a>
       </article>
     {/each}
+  </div>
+</section>
+
+<!-- De interés (video institucional + artículo) -->
+<section class="interest-section">
+  <h2 class="interest-title">De interés</h2>
+  <div class="interest-grid">
+    <!-- Columna izquierda: Video -->
+    <div class="interest-video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/O-dNozuWWgg"
+        title="La Canasta de la U, mercado agroecológico UdeA"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <!-- Columna derecha: Texto -->
+    <div class="interest-text">
+      <h3 class="interest-article-title">
+        La Canasta de la U, mercado agroecológico UdeA, celebra 10 años de trabajo por la sostenibilidad
+      </h3>
+      <p class="interest-paragraph">
+        La Canasta de la U, mercado agroecológico de la Universidad de Antioquia, celebró diez años el pasado 23 de octubre, durante el Festival La Tierra Celebra. Los viernes cada quince días, este espacio reúne en Ciudad Universitaria, campus Medellín, a una red de 23 productores locales que ofrecen frutas, verduras, quesos, café, panes, especias, jabones y tejidos, entre otros productos.
+      </p>
+      <p class="interest-paragraph">
+        Además de conectar a la comunidad universitaria con productores de distintas regiones de Antioquia, las canasterías promueven el intercambio de saberes, la construcción de vínculos y el reconocimiento de otras formas de producir y consumir. Para sus participantes, La Canasta de la U es también un espacio de encuentro y resistencia colectiva, que fortalece las economías locales y abre oportunidades para aprender más allá de las aulas.
+      </p>
+      <p class="interest-paragraph">
+        La Canasta de la U opera bajo la coordinación del Grupo de Investigación Aliados con el Planeta, adscrito a la Corporación Académica Ambiental, y cuenta con el apoyo de la Dirección de Bienestar Universitario, la Vicerrectoría de Extensión, la Escuela de Nutrición y Dietética y Cooprudea.
+      </p>
+    </div>
   </div>
 </section>
