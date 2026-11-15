@@ -1,5 +1,6 @@
 <script lang="ts">
   import './contacto.css';
+  import 'iconify-icon';
   import { OFFICIAL_CHANNELS, CAMPUS_LOCATIONS } from './contacto';
 
   let formName = $state('');
@@ -35,7 +36,7 @@
         {/if}
         <h2 class="channel-name">{ch.name}</h2>
         <div class="channel-detail">{ch.detail}</div>
-        <p class="channel-schedule">⏰ {ch.schedule}</p>
+        <p class="channel-schedule"><iconify-icon icon="akar-icons:clock"></iconify-icon> {ch.schedule}</p>
       </article>
     {/each}
   </section>
@@ -106,9 +107,9 @@
           <div class="location-item">
             <span class="location-city">{loc.city}</span>
             <div class="location-name">{loc.name}</div>
-            <div class="location-address">📍 {loc.address}</div>
+            <div class="location-address"> <iconify-icon icon="andrsrxn:map-pin"></iconify-icon> {loc.address}</div>
             <div class="text-xs text-emerald-800 font-semibold mt-1">
-              📞 {loc.phone} • ✉️ {loc.email}
+              <iconify-icon icon="andrsrxn:phone"></iconify-icon> {loc.phone} • <iconify-icon icon="mage:email"></iconify-icon> {loc.email}
             </div>
           </div>
         {/each}
