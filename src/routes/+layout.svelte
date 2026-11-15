@@ -29,6 +29,8 @@
 <svelte:head>
   <title>Portal Web UdeA | Rediseño Oficial ResignUP</title>
   <meta name="description" content="Rediseño del portal oficial de la Universidad de Antioquia con navegación clara, rápida y accesible." />
+  <!-- Prefetch critical hero image to reduce LCP -->
+  <link rel="preload" as="image" href="/campus-udea.jpg" />
   <!-- Favicons for responsive devices -->
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
