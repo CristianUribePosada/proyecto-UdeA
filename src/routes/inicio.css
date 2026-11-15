@@ -3,7 +3,7 @@
 .hero-banner {
 	background-image: 
 		linear-gradient(135deg, rgba(10, 60, 35, 0.90) 0%, rgba(15, 90, 53, 0.88) 60%, rgba(22, 101, 52, 0.92) 100%),
-		url('/campus-udea.jpg');
+		url('/campus-udea.webp');
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;

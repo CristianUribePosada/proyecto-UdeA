@@ -66,7 +66,7 @@
 <header class="site-header">
   <div class="header-inner">
     <a href="/" class="brand-wrapper" title="Ir al Inicio del portal de la UdeA">
-      <img src="/logo-udea.webp" alt="Universidad de Antioquia" class="header-logo" width="280" height="50" />
+      <img src="/logo-udea.webp" alt="Universidad de Antioquia" class="header-logo" width="280" height="50" loading="lazy" />
     </a>
 
     <!-- Accesos Rápidos por Roles (Siempre visibles y optimizados para móviles) -->
