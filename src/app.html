@@ -4,15 +4,48 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="text-scale" content="scale" />
-		<!-- Orígenes críticos de renderizado: únicamente Google Fonts (CSS + binarios de fuente) -->
+
+		<!-- Orígenes críticos de renderizado: únicamente Google Fonts (CSS + binarios de fuente).
+		     fonts.gstatic.com sirve los .woff2 con CORS, por lo que requiere crossorigin. -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<!-- Sin preconnect de YouTube/i.ytimg: el iframe usa loading="lazy" y no compite por el
-		     ancho de banda inicial (elimina la advertencia "preconnect not used") -->
+
+		<!-- Precarga de los CSS críticos inyectados por SvelteKit (layout + página de inicio).
+		     NOTA: los nombres llevan hash de contenido generado por Vite. Deben sincronizarse
+		     con el build (ver .svelte-kit/output/client/_app/immutable/assets/). Si el hash
+		     cambia, el preload se ignora y el <link rel="stylesheet"> inyectado por SvelteKit
+		     sigue funcionando con normalidad (no hay doble descarga: comparten la misma URL). -->
+		<link rel="preload" as="style" href="/_app/immutable/assets/0.BhXpVq02.css" />
+		<link rel="preload" as="style" href="/_app/immutable/assets/2.Dm9ShUd5.css" />
+
+		<!-- Precarga del binario de fuente (subset latin, estilo normal) para romper la cadena
+		     HTML -> Google Fonts CSS -> .woff2. El navegador lo descarga en paralelo con el
+		     resto de recursos en lugar de esperar a parsear el CSS de Google Fonts.
+		     crossorigin es obligatorio: las fuentes siempre se piden con CORS. -->
 		<link
-			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
-			rel="stylesheet"
+			rel="preload"
+			as="font"
+			type="font/woff2"
+			crossorigin
+			href="https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2"
 		/>
+
+		<!-- Google Fonts CSS asíncrono: fuera de la ruta crítica de renderizado.
+		     El truco onload cambia rel="preload" -> "stylesheet" cuando termina de descargar,
+		     evitando que el CSS de fuentes bloquee el primer pintado. -->
+		<link
+			rel="preload"
+			as="style"
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+			onload="this.onload=null;this.rel='stylesheet'"
+		/>
+		<noscript>
+			<link
+				rel="stylesheet"
+				href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+			/>
+		</noscript>
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
