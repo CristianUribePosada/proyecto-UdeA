@@ -5,6 +5,10 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+	// Nota: SvelteKit fuerza build.cssCodeSplit = true, por lo que no se puede
+	// consolidar el CSS en un único archivo desde aquí. La carga asíncrona de los
+	// CSS inyectados se gestiona en src/hooks.server.ts y el CSS crítico va inline
+	// en src/app.html.
 	plugins: [
 		enhancedImages(),
 		tailwindcss(),

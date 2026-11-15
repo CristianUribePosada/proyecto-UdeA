@@ -10,14 +10,6 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-		<!-- Precarga de los CSS críticos inyectados por SvelteKit (layout + página de inicio).
-		     NOTA: los nombres llevan hash de contenido generado por Vite. Deben sincronizarse
-		     con el build (ver .svelte-kit/output/client/_app/immutable/assets/). Si el hash
-		     cambia, el preload se ignora y el <link rel="stylesheet"> inyectado por SvelteKit
-		     sigue funcionando con normalidad (no hay doble descarga: comparten la misma URL). -->
-		<link rel="preload" as="style" href="/_app/immutable/assets/0.BhXpVq02.css" />
-		<link rel="preload" as="style" href="/_app/immutable/assets/2.Dm9ShUd5.css" />
-
 		<!-- Precarga del binario de fuente (subset latin, estilo normal) para romper la cadena
 		     HTML -> Google Fonts CSS -> .woff2. El navegador lo descarga en paralelo con el
 		     resto de recursos en lugar de esperar a parsear el CSS de Google Fonts.
@@ -45,6 +37,286 @@
 				href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
 			/>
 		</noscript>
+
+		<!-- CSS crítico above-the-fold (cabecera, navegación, breadcrumbs y hero).
+		     Inline para que el primer pantallazo se pinte sin esperar a los archivos
+		     externos, que se cargan de forma asíncrona (ver src/hooks.server.ts).
+		     NOTA: estas reglas están duplicadas de src/routes/layout.css e inicio.css.
+		     Si se modifican allí, deben sincronizarse aquí. -->
+		<style>
+			:root {
+				--udea-green-primary: #0f5a35;
+				--udea-green-dark: #0a3c23;
+				--udea-green-light: #18804d;
+				--udea-green-surface: #ebf5f0;
+				--udea-yellow-gold: #f5a623;
+				--udea-neutral-dark: #1f2937;
+				--udea-neutral-muted: #4b5563;
+				--udea-border: #e5e7eb;
+				--font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+					Helvetica, Arial, sans-serif;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				font-family: var(--font-sans);
+				font-optical-sizing: auto;
+				color: var(--udea-neutral-dark);
+				background-color: #f8faf9;
+				margin: 0;
+				padding: 0;
+				-webkit-font-smoothing: antialiased;
+			}
+			a {
+				text-decoration: none;
+				color: inherit;
+			}
+			.top-gov-bar {
+				background-color: #0a3c23;
+				color: #ffffff;
+				font-size: 0.75rem;
+				padding: 0.35rem 1.5rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.top-gov-bar a {
+				color: #d1fae5;
+				font-weight: 500;
+			}
+			.site-header {
+				background: #ffffff;
+				border-bottom: 1px solid var(--udea-border);
+				position: relative;
+			}
+			.header-inner {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 1.5rem;
+				height: 68px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1.5rem;
+			}
+			.brand-wrapper {
+				display: flex;
+				align-items: center;
+				height: 100%;
+			}
+			.header-logo {
+				height: 50px;
+				max-width: 280px;
+				width: auto;
+				object-fit: contain;
+				display: block;
+			}
+			.role-bar {
+				display: flex;
+				align-items: center;
+				gap: 0.4rem;
+				flex-wrap: wrap;
+			}
+			.role-label-title {
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: #374151;
+				margin-right: 0.25rem;
+			}
+			.role-link {
+				font-size: 0.75rem;
+				font-weight: 600;
+				padding: 0.25rem 0.55rem;
+				border-radius: 9999px;
+				background-color: #f3f4f6;
+				color: #374151;
+				white-space: nowrap;
+			}
+			.sticky-nav-wrapper {
+				position: sticky;
+				top: 0;
+				z-index: 50;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			}
+			.main-nav {
+				background-color: var(--udea-green-primary);
+				color: #ffffff;
+			}
+			.main-nav-inner {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 1.5rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				position: relative;
+			}
+			.mobile-nav-title {
+				display: none;
+			}
+			.mobile-menu-btn {
+				display: none;
+			}
+			.nav-links {
+				display: flex;
+				align-items: center;
+				gap: 0.25rem;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.nav-item-link {
+				display: inline-block;
+				padding: 0.85rem 1rem;
+				font-weight: 600;
+				font-size: 0.9rem;
+				color: #ffffff;
+				border-bottom: 3px solid transparent;
+				white-space: nowrap;
+			}
+			.nav-item-link.active {
+				background-color: var(--udea-green-dark);
+				border-bottom-color: var(--udea-yellow-gold);
+			}
+			.breadcrumbs-bar {
+				background-color: #f0fdf4;
+				border-bottom: 1px solid #dcfce7;
+				padding: 0.55rem 1.5rem;
+				font-size: 0.825rem;
+			}
+			.breadcrumbs-inner {
+				max-width: 1200px;
+				margin: 0 auto;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				color: #166534;
+			}
+			.breadcrumb-link {
+				color: var(--udea-green-primary);
+				font-weight: 500;
+				text-decoration: underline;
+				text-underline-offset: 3px;
+			}
+			.breadcrumb-separator {
+				color: #9ca3af;
+			}
+			.breadcrumb-current {
+				font-weight: 700;
+				color: #111827;
+			}
+			.hero-banner {
+				background-image: linear-gradient(
+						135deg,
+						rgba(10, 60, 35, 0.9) 0%,
+						rgba(15, 90, 53, 0.88) 60%,
+						rgba(22, 101, 52, 0.92) 100%
+					),
+					url('/campus-udea.webp');
+				background-size: cover;
+				background-position: center top;
+				background-repeat: no-repeat;
+				color: #ffffff;
+				padding: 4.5rem 1.5rem 4rem;
+				min-height: 350px;
+				position: relative;
+				overflow: visible;
+				box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.45);
+			}
+			.hero-container {
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+			.hero-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background-color: rgba(245, 166, 35, 0.2);
+				color: #fcd34d;
+				border: 1px solid rgba(245, 166, 35, 0.4);
+				padding: 0.35rem 0.85rem;
+				border-radius: 9999px;
+				font-size: 0.8rem;
+				font-weight: 600;
+				margin-bottom: 1.25rem;
+			}
+			.hero-title {
+				font-size: clamp(2rem, 5vw, 3.25rem);
+				font-weight: 800;
+				line-height: 1.15;
+				margin-bottom: 1rem;
+				color: #ffffff;
+			}
+			.hero-subtitle {
+				font-size: 1.15rem;
+				color: #e2e8f0;
+				max-width: 720px;
+				line-height: 1.6;
+				margin-bottom: 2.5rem;
+			}
+			.search-box-wrapper {
+				max-width: 760px;
+				background: #ffffff;
+				border-radius: 12px;
+				padding: 0.4rem;
+				box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+				position: relative;
+				z-index: 40;
+			}
+			.search-input-group {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				padding: 0.25rem 0.75rem;
+			}
+			.search-input {
+				flex: 1;
+				border: none;
+				outline: none;
+				font-size: 1.05rem;
+				color: #1f2937;
+				padding: 0.6rem 0.25rem;
+			}
+			@media (max-width: 768px) {
+				.header-inner {
+					height: auto;
+					min-height: 64px;
+					padding: 0.5rem 1rem;
+					flex-wrap: wrap;
+					gap: 0.5rem;
+				}
+				.header-logo {
+					height: 42px;
+					max-width: 200px;
+				}
+				.role-bar {
+					width: 100%;
+					overflow-x: auto;
+					white-space: nowrap;
+					padding-top: 0.25rem;
+					padding-bottom: 0.25rem;
+					border-top: 1px solid #f3f4f6;
+				}
+				.mobile-nav-title {
+					display: block;
+				}
+				.mobile-menu-btn {
+					display: flex;
+				}
+				.main-nav-inner {
+					padding: 0.5rem 1rem;
+				}
+				.nav-links {
+					display: none;
+				}
+				.hero-banner {
+					padding: 3rem 1rem 2.5rem;
+					min-height: 280px;
+				}
+			}
+		</style>
 
 		%sveltekit.head%
 	</head>
