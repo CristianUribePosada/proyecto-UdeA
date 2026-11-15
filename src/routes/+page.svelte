@@ -155,6 +155,7 @@
         src="https://www.youtube.com/embed/O-dNozuWWgg"
         title="La Canasta de la U, mercado agroecológico UdeA"
         frameborder="0"
+        loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
