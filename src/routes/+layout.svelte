@@ -1,5 +1,7 @@
 <script lang="ts">
   import './layout.css';
+  import { fade } from 'svelte/transition';
+
   
   import type { LayoutProps } from './$types';
   import { page } from '$app/state';
@@ -145,9 +147,12 @@
   </nav>
 </div>
 
-<main class="main-content">
-  {@render children()}
-</main>
+
+{#key currentPath}
+  <main class="main-content" in:fade={{duration:150}} out:fade={{duration:150}}>
+    {@render children()}
+  </main>
+{/key}
 
 <!-- Pie de página Institucional Oficial -->
 <footer class="site-footer">

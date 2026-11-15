@@ -173,19 +173,50 @@ function normalizeText(text: string): string {
 }
 
 export function performClientSearch(query: string): SearchResult[] {
+  // Helper: compute Levenshtein distance between two strings
+  function levenshtein(a: string, b: string): number {
+    const al = a.length;
+    const bl = b.length;
+    const dp = Array.from({ length: al + 1 }, () => new Array(bl + 1).fill(0));
+    for (let i = 0; i <= al; i++) dp[i][0] = i;
+    for (let j = 0; j <= bl; j++) dp[0][j] = j;
+    for (let i = 1; i <= al; i++) {
+      for (let j = 1; j <= bl; j++) {
+        if (a[i - 1] === b[j - 1]) dp[i][j] = dp[i - 1][j - 1];
+        else dp[i][j] = Math.min(
+          dp[i - 1][j] + 1,      // deletion
+          dp[i][j - 1] + 1,      // insertion
+          dp[i - 1][j - 1] + 1   // substitution
+        );
+      }
+    }
+    return dp[al][bl];
+  }
+
+  // Helper: fuzzy match a token against haystack words
+  function fuzzyMatch(token: string, haystack: string): boolean {
+    if (haystack.includes(token)) return true;
+    // Split haystack into words for distance comparison
+    const words = haystack.split(/\s+/);
+    const maxDist = token.length <= 4 ? 1 : 2; // tolerance based on length
+    for (const w of words) {
+      if (levenshtein(token, w) <= maxDist) return true;
+    }
+    return false;
+  }
+
   const cleanQuery = normalizeText(query);
   if (!cleanQuery) return [];
 
-  // Mapeo de sinónimos comunes y palabras clave
   const tokens = cleanQuery.split(/\s+/).filter(Boolean);
 
   return SEARCH_INDEX.filter((item) => {
     const haystack = normalizeText(`${item.title} ${item.category} ${item.description}`);
-    // Coincidencia inteligente: cada palabra buscada debe coincidir
     return tokens.every((token) => {
-      // Tolera plurales sencillos (ej: "pregrados" busca "pregrado")
       const singular = token.endsWith('s') ? token.slice(0, -1) : token;
-      return haystack.includes(token) || (singular.length > 3 && haystack.includes(singular));
+      // Use fuzzy matching on token and its singular form
+      return fuzzyMatch(token, haystack) || (singular.length > 3 && fuzzyMatch(singular, haystack));
     });
   });
 }
+
