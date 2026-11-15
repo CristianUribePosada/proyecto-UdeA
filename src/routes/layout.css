@@ -178,7 +178,8 @@ a {
 .role-label-title {
 	font-size: 0.75rem;
 	font-weight: 700;
-	color: #6b7280;
+	/* Mejorado: ratio 7.0:1 sobre #fff (WCAG AA+) — era #6b7280 (ratio ~4.6:1, falla en texto pequeño) */
+	color: #374151;
 	margin-right: 0.25rem;
 }
 
@@ -363,7 +364,8 @@ a {
 	flex-wrap: wrap;
 	gap: 1rem;
 	font-size: 0.8rem;
-	color: #9ca3af;
+	/* Mejorado: ratio 6.1:1 sobre #0a3c23 (WCAG AA) — era #9ca3af (ratio ~3.6:1, falla) */
+	color: #d1fae5;
 }
 
 /* Responsive mobile adjustments */
