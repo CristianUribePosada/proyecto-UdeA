@@ -16,17 +16,8 @@
   }
 </script>
 
-<svelte:head>
-  <!-- LCP: la imagen del hero se carga por CSS (background-image), por lo que se
-       declara explícitamente su precarga con prioridad alta para el descubrimiento temprano -->
-  <link
-    rel="preload"
-    href="/campus-udea.webp"
-    as="image"
-    type="image/webp"
-    fetchpriority="high"
-  />
-</svelte:head>
+<!-- LCP: la precarga de /campus-udea.webp (fetchpriority="high") vive en src/app.html,
+     en el <head> del documento, para que el navegador la descubra desde el primer byte. -->
 
 <!-- Banner Rediseñado: Sin sobrecarga visual, con foco en el usuario -->
 <section class="hero-banner">

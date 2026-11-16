@@ -22,6 +22,18 @@
 			href="https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2"
 		/>
 
+		<!-- LCP: precarga de la imagen de fondo del hero (campus-udea.webp, 580x365, ~38 KB).
+		     Al ser un background-image en CSS, el navegador no la descubre hasta parsear el
+		     CSS; este preload la pone en la cola de descarga desde el primer byte del HTML.
+		     fetchpriority="high" la prioriza sobre el resto de recursos de la página. -->
+		<link
+			rel="preload"
+			href="/campus-udea.webp"
+			as="image"
+			type="image/webp"
+			fetchpriority="high"
+		/>
+
 		<!-- Google Fonts CSS asíncrono: fuera de la ruta crítica de renderizado.
 		     El truco onload cambia rel="preload" -> "stylesheet" cuando termina de descargar,
 		     evitando que el CSS de fuentes bloquee el primer pintado. -->
@@ -39,11 +51,23 @@
 		</noscript>
 
 		<!-- CSS crítico above-the-fold (cabecera, navegación, breadcrumbs y hero).
-		     Inline para que el primer pantallazo se pinte sin esperar a los archivos
-		     externos, que se cargan de forma asíncrona (ver src/hooks.server.ts).
+		     Inline para que el primer pantallazo se pinte de inmediato. El CSS externo
+		     de SvelteKit se sirve de forma bloqueante (ver src/hooks.server.ts) para
+		     evitar reflujos tardíos y CLS.
 		     NOTA: estas reglas están duplicadas de src/routes/layout.css e inicio.css.
 		     Si se modifican allí, deben sincronizarse aquí. -->
 		<style>
+			/* Fallback métrico de Plus Jakarta Sans: reserva el mismo espacio que la fuente
+			   web mientras descarga (font-display: swap), evitando el salto de texto (FOUT)
+			   y el CLS asociado. Valores aproximados basados en las métricas de la fuente. */
+			@font-face {
+				font-family: 'Plus Jakarta Sans Fallback';
+				src: local('Arial'), local('Helvetica'), local('Liberation Sans');
+				size-adjust: 102%;
+				ascent-override: 100%;
+				descent-override: 25%;
+				line-gap-override: 0%;
+			}
 			:root {
 				--udea-green-primary: #0f5a35;
 				--udea-green-dark: #0a3c23;
@@ -53,8 +77,8 @@
 				--udea-neutral-dark: #1f2937;
 				--udea-neutral-muted: #4b5563;
 				--udea-border: #e5e7eb;
-				--font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-					Helvetica, Arial, sans-serif;
+				--font-sans: 'Plus Jakarta Sans', 'Plus Jakarta Sans Fallback', -apple-system,
+					BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 			}
 			* {
 				box-sizing: border-box;
@@ -80,6 +104,7 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
+				min-height: 32px;
 			}
 			.top-gov-bar a {
 				color: #d1fae5;
@@ -109,6 +134,7 @@
 				height: 50px;
 				max-width: 280px;
 				width: auto;
+				aspect-ratio: 292 / 73;
 				object-fit: contain;
 				display: block;
 			}
@@ -151,6 +177,7 @@
 				align-items: center;
 				justify-content: space-between;
 				position: relative;
+				min-height: 48px;
 			}
 			.mobile-nav-title {
 				display: none;
@@ -184,6 +211,7 @@
 				border-bottom: 1px solid #dcfce7;
 				padding: 0.55rem 1.5rem;
 				font-size: 0.825rem;
+				min-height: 36px;
 			}
 			.breadcrumbs-inner {
 				max-width: 1200px;
@@ -208,6 +236,7 @@
 				color: #111827;
 			}
 			.hero-banner {
+				background-color: #0a3c23;
 				background-image: linear-gradient(
 						135deg,
 						rgba(10, 60, 35, 0.9) 0%,

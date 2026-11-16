@@ -1,37 +1,22 @@
 import type { Handle } from '@sveltejs/kit/hooks';
 
 /**
- * Reescribe los <link rel="stylesheet"> que SvelteKit inyecta en el <head>
- * para que carguen de forma asíncrona (preload + onload), evitando que
- * bloqueen el renderizado inicial del navegador.
+ * NOTA DE RENDIMIENTO (CLS):
  *
- * El CSS crítico above-the-fold (cabecera, navegación y hero) va inline en
- * src/app.html, por lo que el primer pantallazo se pinta sin esperar a la
- * descarga de los archivos externos.
+ * Anteriormente este hook reescribía los <link rel="stylesheet"> que SvelteKit
+ * inyecta en el <head> para cargarlos de forma asíncrona (preload + onload).
+ * Ese patrón provocaba un CLS de ~0.708: el primer pantallazo se pintaba con
+ * el CSS crítico inline de src/app.html, pero las utilidades de Tailwind y los
+ * estilos de componentes (footer, secciones, .main-content, etc.) llegaban
+ * DESPUÉS del primer pintado, refluyendo todo el documento y desplazando el
+ * contenido visible.
  *
- * Formato inyectado por SvelteKit: <link href="/_app/immutable/assets/x.css" rel="stylesheet">
+ * Ahora el CSS se sirve de forma bloqueante (comportamiento por defecto de
+ * SvelteKit): el navegador no pinta hasta tener el CSS completo, por lo que
+ * no hay reflujo tardío ni cambios de diseño acumulados. El CSS crítico
+ * inline de src/app.html se mantiene como optimización de primer pintado y
+ * debe sincronizarse con src/routes/layout.css e inicio.css.
  */
 export const handle: Handle = async ({ event, resolve }) => {
-	const response = await resolve(event);
-	const contentType = response.headers.get('content-type') ?? '';
-	if (!contentType.includes('text/html')) return response;
-
-	const html = await response.text();
-	const rewritten = html.replace(/<link\b[^>]*>/g, (tag) => {
-		if (!/rel="stylesheet"/.test(tag)) return tag;
-		const match = tag.match(/href="([^"]*_app\/immutable\/assets\/[^"]+\.css)"/);
-		if (!match) return tag;
-		const href = match[1];
-		return `<link rel="preload" as="style" href="${href}" onload="this.onload=null;this.rel='stylesheet'" /><noscript><link rel="stylesheet" href="${href}" /></noscript>`;
-	});
-
-	const headers = new Headers(response.headers);
-	// El HTML reescrito tiene distinta longitud; se elimina para que el runtime la recalcule.
-	headers.delete('content-length');
-
-	return new Response(rewritten, {
-		status: response.status,
-		statusText: response.statusText,
-		headers
-	});
+	return resolve(event);
 };
