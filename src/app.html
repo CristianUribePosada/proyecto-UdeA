@@ -51,9 +51,10 @@
 		</noscript>
 
 		<!-- CSS crítico above-the-fold (cabecera, navegación, breadcrumbs y hero).
-		     Inline para que el primer pantallazo se pinte de inmediato. El CSS externo
-		     de SvelteKit se sirve de forma bloqueante (ver src/hooks.server.ts) para
-		     evitar reflujos tardíos y CLS.
+		     Inline como red de seguridad para el primer pintado. SvelteKit además
+		     inlinea TODO el CSS en el HTML vía inlineStyleThreshold (ver vite.config.ts),
+		     por lo que los <link rel="stylesheet"> externos se emiten deshabilitados
+		     (media="(max-width: 0)") y no bloquean el renderizado.
 		     NOTA: estas reglas están duplicadas de src/routes/layout.css e inicio.css.
 		     Si se modifican allí, deben sincronizarse aquí. -->
 		<style>

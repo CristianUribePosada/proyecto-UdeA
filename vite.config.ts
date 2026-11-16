@@ -5,10 +5,11 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	// Nota: SvelteKit fuerza build.cssCodeSplit = true, por lo que no se puede
-	// consolidar el CSS en un único archivo desde aquí. La carga asíncrona de los
-	// CSS inyectados se gestiona en src/hooks.server.ts y el CSS crítico va inline
-	// en src/app.html.
+	// La config de SvelteKit se pasa al plugin sveltekit() (esta versión no usa
+	// svelte.config.js). inlineStyleThreshold inlinea todo el CSS en el HTML,
+	// por lo que no hay CSS externo bloqueante ni reflujo tardío (CLS = 0) y el
+	// primer pintado es inmediato. El CSS total del proyecto (~23 kB) está muy
+	// por debajo del umbral.
 	plugins: [
 		enhancedImages(),
 		tailwindcss(),
@@ -18,11 +19,8 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-
-			// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-			// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-			// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-			adapter: adapter()
+			adapter: adapter(),
+			inlineStyleThreshold: 100000
 		})
 	]
 });

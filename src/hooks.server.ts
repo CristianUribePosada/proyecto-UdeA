@@ -1,21 +1,17 @@
 import type { Handle } from '@sveltejs/kit/hooks';
 
 /**
- * NOTA DE RENDIMIENTO (CLS):
+ * NOTA DE RENDIMIENTO (FCP / LCP / CLS):
  *
- * Anteriormente este hook reescribía los <link rel="stylesheet"> que SvelteKit
- * inyecta en el <head> para cargarlos de forma asíncrona (preload + onload).
- * Ese patrón provocaba un CLS de ~0.708: el primer pantallazo se pintaba con
- * el CSS crítico inline de src/app.html, pero las utilidades de Tailwind y los
- * estilos de componentes (footer, secciones, .main-content, etc.) llegaban
- * DESPUÉS del primer pintado, refluyendo todo el documento y desplazando el
- * contenido visible.
+ * El CSS del proyecto se inlinea en el HTML mediante `inlineStyleThreshold`
+ * (ver vite.config.ts), por lo que SvelteKit emite los <link rel="stylesheet">
+ * externos con `disabled media="(max-width: 0)"` (no bloquean el renderizado) y
+ * el CSS real viaja como <style> en el <head>. El primer pintado dispone de
+ * todos los estilos, por lo que no hay reflujo tardío (CLS = 0) ni espera a
+ * hojas de estilo externas (FCP/LCP rápidos).
  *
- * Ahora el CSS se sirve de forma bloqueante (comportamiento por defecto de
- * SvelteKit): el navegador no pinta hasta tener el CSS completo, por lo que
- * no hay reflujo tardío ni cambios de diseño acumulados. El CSS crítico
- * inline de src/app.html se mantiene como optimización de primer pintado y
- * debe sincronizarse con src/routes/layout.css e inicio.css.
+ * Este hook se mantiene como pass-through: no hay nada que reescribir porque
+ * los <link> externos ya están deshabilitados por SvelteKit.
  */
 export const handle: Handle = async ({ event, resolve }) => {
 	return resolve(event);
