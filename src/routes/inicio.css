@@ -383,6 +383,57 @@
 	border: none;
 }
 
+/* Fachada de YouTube (click-to-load): evita cookies/scripts de terceros hasta el clic */
+.youtube-facade {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	background: #000;
+	display: block;
+	overflow: hidden;
+}
+
+.youtube-facade-thumb {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.youtube-facade-play {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: transform 0.2s ease;
+	filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+	pointer-events: none;
+}
+
+.youtube-facade:hover .youtube-facade-play,
+.youtube-facade:focus-visible .youtube-facade-play {
+	transform: translate(-50%, -50%) scale(1.12);
+}
+
+.youtube-facade-title {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 1.5rem 1rem 0.75rem;
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+	color: #ffffff;
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-align: left;
+	line-height: 1.4;
+	pointer-events: none;
+}
+
 /* Texto derecho */
 .interest-article-title {
 	font-size: 1.1rem;
